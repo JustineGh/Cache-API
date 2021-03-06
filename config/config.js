@@ -2,7 +2,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const env = process.env.NODE_ENV || 'dev';
-console.log('ENV', env);
 
 const config = {
     port: process.env.PORT || 3000,

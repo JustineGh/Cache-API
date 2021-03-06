@@ -59,7 +59,6 @@ const getAllCacheData = async (req,res,next) => {
     try {
         let allCacheData = await CacheData.find({});
         allValidCacheData = await hanldeDataTtl(allCacheData);
-        console.log(allValidCacheData);
     } catch (err) {
         const error = new HttpError(
             'Something went wrong',
