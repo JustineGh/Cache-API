@@ -13,7 +13,7 @@ Follow these steps to run the server:
 5. **Npm test**
 
 # Endpoints
-## /api/data/2
+## /api/data/createOrUpdate/2
 * This call is used to createOrUpdate
 
 * Method: POST
@@ -32,7 +32,7 @@ Sample response:
 }
 ~~~
 
-## /api/data/2
+## /api/data/get/2
 * This call is used to retrieve data for the provided key
 
 * Method: GET
@@ -54,7 +54,7 @@ Sample response:
 ~~~
 
 
-## /api/data
+## /api/data/get
 * This call is used to retrieve all data
 
 * Method: GET
@@ -75,7 +75,7 @@ Sample response:
 }
 ~~~
 
-## /api/data/2
+## /api/data/remove/2
 * This call is used to delete data for the provided key
  
 * Method: DELETE
@@ -87,7 +87,7 @@ Sample response:
 }
 ~~~
 
-## /api/data
+## /api/data/remove
 * This call is used to delete all cache data
 
 * Method: DELETE
