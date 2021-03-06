@@ -24,7 +24,7 @@ describe('API Calls', () => {
     test('POST createOrUpdate', async () => {
         const initialDbDataSize = await CacheDataModel.countDocuments();
         return request(app)
-        .post('/api/data/2')
+        .post('/api/data/createOrUpdate/2')
         .send({
             value: 'test2'
         })
@@ -37,7 +37,7 @@ describe('API Calls', () => {
     test('GET allCacheData', async () => {
         const dbDataSize = await CacheDataModel.countDocuments();
         return request(app)
-        .get('/api/data')
+        .get('/api/data/get')
         .then( res => {
             expect(res.body.allValidCacheData.length).toEqual(dbDataSize);
         });
@@ -45,7 +45,7 @@ describe('API Calls', () => {
 
     test('GET cacheDataByKey', async () => {
         return request(app)
-        .get('/api/data/2')
+        .get('/api/data/get/2')
         .then(res => {
             expect(res.body.cacheData.key).toEqual('2');
         });
@@ -54,7 +54,7 @@ describe('API Calls', () => {
     test('DELETE cacheDataByKey', async () => {
         const initialDbDataSize = await CacheDataModel.countDocuments();
         return request(app)
-        .delete('/api/data/2')
+        .delete('/api/data/remove/2')
         .then( async (res) => {
             const newDbDataSize = await CacheDataModel.countDocuments();
             expect(newDbDataSize).toEqual(initialDbDataSize-1);
@@ -63,7 +63,7 @@ describe('API Calls', () => {
 
     test('DELETE allCacheData', async () => {
         return request(app)
-        .delete('/api/data')
+        .delete('/api/data/remove')
         .then( async (res) => {
             const newDbDataSize = await CacheDataModel.countDocuments();
             expect(newDbDataSize).toEqual(0);
