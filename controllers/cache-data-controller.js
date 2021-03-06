@@ -35,7 +35,7 @@ const createOrUpdate = async (req, res, next) => {
         data = await hanldeDataLimit(key, value);
     }
     
-    res.status(201).json('Data created successfully!');
+    res.status(201).json({ message:'Data created successfully!'});
 
   } else {
       cacheData.value = value;
@@ -50,7 +50,7 @@ const createOrUpdate = async (req, res, next) => {
           );
         return next(error);
       }
-      res.status(200).json('Data updated successfully!');
+      res.status(200).json({ message:'Data updated successfully!'});
     }
 }
 
