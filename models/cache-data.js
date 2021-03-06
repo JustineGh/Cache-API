@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 
 const cacheDataSchema = new Schema({
-    key: { type: String, required: true, unique: true },
+    key: { type: String, required: true, unique: true, index: true },
     value: { type: String, required: true },
     createdAt: { type: Date, required: true },
     expiresAt: { type: Date, required: true }
