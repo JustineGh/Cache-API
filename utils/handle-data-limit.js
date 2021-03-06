@@ -1,5 +1,6 @@
 const CacheData = require('../models/cache-data');
 const generateTtl = require('./generate-ttl');
+const HttpError = require('../models/http-error');
 
 async function hanldeDataLimit(key, value) {
     let oldestCacheData;
@@ -19,7 +20,11 @@ async function hanldeDataLimit(key, value) {
         return oldestCacheData;
 
     } catch(error) {
-
+        const error = new HttpError(
+            'Something went wrong, please try again.',
+            500
+          );
+        return next(error);
     }
 }
 
