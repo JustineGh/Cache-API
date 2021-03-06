@@ -19,7 +19,7 @@ async function hanldeDataLimit(key, value) {
         
         return oldestCacheData;
 
-    } catch(error) {
+    } catch(err) {
         const error = new HttpError(
             'Something went wrong, please try again.',
             500

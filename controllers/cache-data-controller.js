@@ -55,18 +55,20 @@ const createOrUpdate = async (req, res, next) => {
 }
 
 const getAllCacheData = async (req,res,next) => {
-        try {
-            let allCacheData = await CacheData.find({});
-            let allValidCacheData = await hanldeDataTtl(allCacheData);
-        } catch (err) {
-            const error = new HttpError(
-                'Something went wrong',
-                500
-              );
-            return next(error);
-        }
+    let allValidCacheData;
+    try {
+        let allCacheData = await CacheData.find({});
+        allValidCacheData = await hanldeDataTtl(allCacheData);
+        console.log(allValidCacheData);
+    } catch (err) {
+        const error = new HttpError(
+            'Something went wrong',
+            500
+            );
+        return next(error);
+    }
 
-        res.status(200).json({ allValidCacheData });
+    res.status(200).json({ allValidCacheData });
 
   }
 

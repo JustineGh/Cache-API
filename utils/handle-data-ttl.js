@@ -12,7 +12,6 @@ async function hanldeDataTtl(cacheData) {
         // Reset TTL on every Read
         data.expiresAt = generateTtl();
         await data.save();
-        console.log('data', data);
         return data;
     });
 
