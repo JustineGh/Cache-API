@@ -13,4 +13,4 @@ function generateString(length) {
     return result;
 }
 
-exports.generateString = generateString;
+module.exports = generateString;
