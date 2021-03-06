@@ -32,6 +32,16 @@ const createOrUpdate = async (req,res,next) => {
     }
 }
 
+const getAllCacheData = async (req,res,next) => {
+        try {
+            let allCacheData = await CacheData.find({});
+            res.status(200).json({ allCacheData });
+        } catch (err) {
+            console.log('error', error);
+        }
+
+  }
 
 exports.createOrUpdate = createOrUpdate;
+exports.getAllCacheData = getAllCacheData;
 
