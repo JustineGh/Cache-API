@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const CacheDataModel = require('../models/cache-data');
 const express = require('express'); 
 const bodyParser = require('body-parser');
-const routes = require("../routes/index");
-const request = require("supertest");
+const routes = require('../routes/index');
+const request = require('supertest');
 const { config } = require('../config/config');
 const app = express();
 
 beforeAll(async () => {
     app.use(bodyParser.json());
-    app.use("/api", routes);
+    app.use('/api', routes);
     await mongoose.connect(config.db_url)
     .then(() => 
         app.listen(config.port)
