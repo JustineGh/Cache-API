@@ -19,10 +19,11 @@ Follow these steps to run the server:
 * Method: POST
 
 Sample request:
-
+~~~
 {
     "value": "test2"
 }
+~~~
 
 Sample response:
 ~~~
