@@ -42,6 +42,19 @@ const getAllCacheData = async (req,res,next) => {
 
   }
 
+const getCacheDataByKey = async (req,res,next) => {
+    const { key } = req.params;
+    let cacheData;
+    try {
+        cacheData = await CacheData.find({key});
+        
+    } catch (err) {
+        console.log('error', error);
+    }
+    res.status(200).json({ cacheData });
+}
+
 exports.createOrUpdate = createOrUpdate;
 exports.getAllCacheData = getAllCacheData;
+exports.getCacheDataByKey = getCacheDataByKey;
 
