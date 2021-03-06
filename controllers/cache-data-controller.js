@@ -1,34 +1,44 @@
 const CacheData = require('../models/cache-data');
+const generateTtl = require('../utils/generate-ttl');
+const hanldeDataLimit = require('../utils/handle-data-limit');
+const { config } = require('../config/config');
 
-const createOrUpdate = async (req,res,next) => {
+const createOrUpdate = async (req, res, next) => {
   const { key } = req.params;
   const { value } = req.body;
 
   let cacheData = await CacheData.findOne({key});
 
   if(!cacheData) {
-      let data = new CacheData({
-          key,
-          value,
-          createdAt: new Date(),
-          expiresAt: new Date()
-      });
-
-      try {
-        await data.save();
-      } catch (err) {
-          console.log('error', error);
-      }
-      res.status(201).json({ data });
+    const dbSize = await CacheData.countDocuments();
+    let data;
+    if(dbSize < config.db_items_limit) {
+        try {
+            data = new CacheData({
+                key,
+                value,
+                createdAt: new Date(),
+                expiresAt: generateTtl()
+            });
+            await data.save();
+        } catch (err) {
+            console.log('error', err);
+        }
+    } else {
+        data = await hanldeDataLimit(key, value);
+    }
+    res.status(201).json('Data created successfully!');
 
   } else {
       cacheData.value = value;
+      // Reset TTL on cache hit
+      cacheData.expiresAt = generateTtl();
       try {
         await cacheData.save();
       } catch (err) {
           console.log('error', error);
       }
-      res.status(200).json({ cacheData });
+      res.status(200).json('Data updated successfully!');
     }
 }
 
