@@ -54,7 +54,35 @@ const getCacheDataByKey = async (req,res,next) => {
     res.status(200).json({ cacheData });
 }
 
+const removeCacheDataByKey = async (req, res, next) => {
+    const { key } = req.params;
+
+    let cacheData;
+    try {
+        cacheData = await CacheData.findOne({key});
+        console.log(cacheData);
+        if(!cacheData) {
+
+        } else {
+            await cacheData.remove();
+            res.status(200).json({ message: 'Deleted cache data.' });
+        }
+    } catch (err) {
+    }
+}
+
+const removeAllCacheData = async (req, res, next) => {
+    try {
+        await CacheData.remove();
+        res.status(200).json({ message: 'Deleted all cache data.' });
+    } catch (err) {
+    }
+    
+}
+
 exports.createOrUpdate = createOrUpdate;
 exports.getAllCacheData = getAllCacheData;
 exports.getCacheDataByKey = getCacheDataByKey;
+exports.removeCacheDataByKey = removeCacheDataByKey;
+exports.removeAllCacheData = removeAllCacheData;
 
